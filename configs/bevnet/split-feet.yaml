@@ -1,0 +1,42 @@
+base: base-split.yaml
+name: BEVNet-feet-split
+notes: a configuration for BEVNet with head branch disabled
+train_setting:
+    train_routines:
+        -   epochs: 5
+            init_lr:
+            train_modules:
+                - decoder_bev
+            use_inferred_pose: false
+        -   epochs: 50
+            init_lr:
+            train_modules:
+                - decoder_bev
+            use_inferred_pose: true
+        -   epochs: 100
+            init_lr:
+            train_modules:
+                - encoder.encoder_feet
+                - decoder_feet
+                - decoder_bev
+            use_inferred_pose: true
+        -   epochs: 150
+            init_lr:
+            train_modules:
+                - encoder.encoder_feet
+                - decoder_feet
+                - decoder_pose
+                - decoder_bev
+            use_inferred_pose: true
+        -   epochs: 200
+            init_lr:
+            train_modules:
+                - encoder
+                - decoder_feet
+                - decoder_pose
+                - decoder_bev
+            use_inferred_pose: true
+model:
+    name: BEVNetFeetOnly
+    kwargs:
+        head_branch_option: null

@@ -1,0 +1,7 @@
+ref: IndividualDistance
+kwargs:
+    dist_type: chamfer
+    active_only: false
+    nms_head_kwargs:
+        nms_size: 5
+        nms_min_val: 1e-3

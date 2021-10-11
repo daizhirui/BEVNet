@@ -1,0 +1,5 @@
+base: base.yaml
+notes: a configuration for training DSSINet
+model:
+    pth_path: checkpoints/DSSINet/shangB.h5
+    load_from_pretrained: true

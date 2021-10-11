@@ -1,0 +1,13 @@
+base: base.yaml
+name: BEVNet-base-split
+dataloader:
+    kwargs:
+        scene_mixed: false
+model:
+    kwargs:
+        head_branch_option:
+            pth_path: ./checkpoints/ivnet/head-split-ep50.pth
+        feet_branch_option:
+            pth_path: ./checkpoints/ivnet/feet-split-ep50.pth
+        pose_branch_option:
+            pth_path: ./checkpoints/PoseNet-split/vgg16_bn/pose-split-ep50.pth

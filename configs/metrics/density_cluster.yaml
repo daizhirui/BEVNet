@@ -1,0 +1,9 @@
+ref: DensityCluster
+kwargs:
+    risk_threshold: 1.8
+    kernel_name: ScaleAdaptiveOnesKernel
+    kernel_kwargs:
+        radius: 1.5
+    nms_head_kwargs:
+        nms_size: 5
+        nms_min_val: 1e-3

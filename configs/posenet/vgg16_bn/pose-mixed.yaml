@@ -1,0 +1,9 @@
+base: ../base.yaml
+name: PoseNet-mixed
+notes: a configuration for PoseNet
+dataloader:
+    kwargs:
+        scene_mixed: true
+model:
+    kwargs:
+        encoder_type: vgg16_bn

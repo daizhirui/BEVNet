@@ -1,0 +1,49 @@
+name: CSRNet-mixed
+ref: CSRNetTask
+datetime: null
+notes: a base configuration for CSRNet
+src_folder: src
+output_path: log
+dataset_path: data/CityUHK-X-BEV
+train_setting:
+    start_epoch: 0
+    epochs: 50
+    valid_on_test: true
+    save_model_freq: 10
+    train_routines:
+        -   epochs: 50
+            init_lr:
+            train_modules:
+            note: finetune
+dataloader:
+    ref: CityUHKBEVLoaders
+    kwargs:
+        keys:
+            - image
+            - head_map
+        scene_mixed: true
+        use_augment: false
+        valid_ratio: 0.2
+        batch_size: 8
+        num_workers: 4
+        pin_memory: true
+model:
+    ref: CSRNet
+    pth_path: checkpoints/CSRNet/CSRNet.pth
+    load_from_pretrained: true
+    kwargs:
+loss:
+    ref: MagnifiedMSELoss
+    kwargs:
+        magnitude_scale: 100
+optimizer:
+    ref: Adam
+    kwargs:
+        lr: 1e-4
+        weight_decay: 1e-4
+lr_scheduler:
+    enable: false
+    ref: StepLR
+    kwargs:
+        step_size: 1
+        gamma: 0.995

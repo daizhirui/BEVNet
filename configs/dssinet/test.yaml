@@ -1,0 +1,5 @@
+base: base.yaml
+notes: a configuration for testing DSSINet
+model:
+    pth_path: checkpoints/DSSINet/finetune-epoch_49.pth
+    load_from_pretrained: false

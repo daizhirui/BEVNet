@@ -1,0 +1,29 @@
+name: FasterRCNN
+ref: RCNNTask
+datetime: null
+notes: a configuration for finetuning FasterRCNN
+src_folder: src
+output_path: log
+dataset_path: data/CityUHK-X-BEV
+train_setting:
+dataloader:
+    ref: CityUHKBEVLoaders
+    kwargs:
+        keys:
+            - image
+            - bev_map
+            - num_annotations
+            - feet_annotation
+            - head_annotation
+            - camera_angle
+        scene_mixed: true
+        use_augment: true
+        valid_ratio: 0.2
+        batch_size: 8
+        num_workers: 8
+        pin_memory: true
+rcnn_config_file: configs/faster_rcnn_r_50_fpn_3x/Faster_RCNN_R_50_FPN_3x.yaml
+model:
+loss:
+optimizer:
+lr_scheduler:

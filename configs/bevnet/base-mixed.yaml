@@ -1,0 +1,13 @@
+base: base.yaml
+name: BEVNet-base-mixed
+dataloader:
+    kwargs:
+        scene_mixed: true
+model:
+    kwargs:
+        head_branch_option:
+            pth_path: ./checkpoints/ivnet/head-mixed-ep50.pth
+        feet_branch_option:
+            pth_path: ./checkpoints/ivnet/feet-mixed-ep50.pth
+        pose_branch_option:
+            pth_path: ./checkpoints/PoseNet-mixed/vgg16_bn/pose-mixed-ep50.pth

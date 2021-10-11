@@ -1,0 +1,9 @@
+base: ../base.yaml
+name: PoseNet-split
+notes: a configuration for PoseNet
+dataloader:
+    kwargs:
+        scene_mixed: false
+model:
+    kwargs:
+        encoder_type: resnet101

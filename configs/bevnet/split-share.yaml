@@ -1,0 +1,66 @@
+base: base-mixed.yaml
+name: BEVNet-shared-split
+notes: a configuration for BEVNet will a shared encoder for all branches
+train_setting:
+    epochs: 250
+    train_routines:
+        -   epochs: 5
+            init_lr: 0.0008
+            note: pretrain each decoder independently
+            train_modules:
+                - decoder_head
+                - decoder_feet
+                - decoder_pose
+            use_inferred_pose: false
+            loss_weight_changes:
+                bev_map: 0.
+        -   epochs: 50
+            init_lr:
+            note: train the shared encoder and each decoder independently
+            train_modules:
+                - encoder
+                - decoder_head
+                - decoder_feet
+                - decoder_pose
+            use_inferred_pose: false
+            loss_weight_changes:
+                bev_map: 0.
+        -   epochs: 55
+            init_lr: 0.0008
+            note: train bev decoder with gt pose
+            train_modules:
+                - decoder_bev
+                - head_height_attention
+            use_inferred_pose: false
+            loss_weight_changes:
+                bev_map: 8.
+        -   epochs: 100
+            init_lr:
+            note: train bev decoder with pred pose
+            train_modules:
+                - decoder_bev
+                - head_height_attention
+            use_inferred_pose: true
+        -   epochs: 250
+            init_lr:
+            train_modules:
+                - encoder
+                - decoder_head
+                - decoder_feet
+                - decoder_pose
+                - decoder_bev
+                - head_height_attention
+            use_inferred_pose: true
+model:
+    ref: BEVNet
+    kwargs:
+        head_branch_option:
+            pth_path:
+        feet_branch_option:
+            pth_path:
+        pose_branch_option:
+            pth_path:
+        share_encoder_option:
+            enable: true
+            encoder_type: vgg16_bn
+            branches: head,feet,pose

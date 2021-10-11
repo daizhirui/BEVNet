@@ -1,0 +1,5 @@
+base: base.yaml
+notes: a configuration for testing CSRNet
+model:
+    pth_path: checkpoints/CSRNet/CSRNet-finetune-ep20.pth
+    load_from_pretrained: false

@@ -1,0 +1,5 @@
+base: base.yaml
+notes: a configuration for training CSRNet
+model:
+    pth_path: checkpoints/CSRNet/CSRNet.pth
+    load_from_pretrained: true

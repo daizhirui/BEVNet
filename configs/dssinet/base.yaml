@@ -1,0 +1,46 @@
+name: DSSINet-mixed
+ref: DSSINetTask
+datetime: null
+notes: a base configuration for DSSINet
+src_folder: src
+output_path: log
+dataset_path: data/CityUHK-X-BEV
+train_setting:
+    start_epoch: 0
+    epochs: 50
+    valid_on_test: true
+    save_model_freq: 10
+    train_routines:
+        -   epochs: 50
+            init_lr:
+            train_modules:
+            note: finetune
+dataloader:
+    ref: CityUHKBEVLoaders
+    kwargs:
+        keys:
+            - image
+            - head_map
+        scene_mixed: true
+        use_augment: true
+        valid_ratio: 0.2
+        batch_size: 8
+        num_workers: 8
+        pin_memory: true
+model:
+    ref: DSSINet
+    pth_path: checkpoints/DSSINet/shangB.h5
+    load_from_pretrained: true
+    kwargs:
+loss:
+    ref: MSELoss
+    kwargs:
+optimizer:
+    ref: Adam
+    kwargs:
+        lr: 0.00001
+lr_scheduler:
+    enable: false
+    ref: ExponentialLR
+    kwargs:
+        gamma: 0.98

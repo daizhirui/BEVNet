@@ -1,0 +1,89 @@
+name: BEVNet-base
+ref: BEVNetTask
+datetime: null
+notes: a base configuration for BEVNet
+src_folder: src
+output_path: log
+dataset_path: data/CityUHK-X-BEV
+train_setting:
+    start_epoch: 0
+    epochs: 200
+    save_model_freq: 10
+    valid_on_test: true
+    train_routines: null
+dataloader:
+    ref: CityUHKBEVLoaders
+    kwargs:
+        keys:
+            - image
+            - head_map
+            - feet_map
+            - bev_map
+            - camera_height
+            - camera_angle
+            - camera_fu
+            - camera_fv
+        scene_mixed: true
+        use_augment: true
+        valid_ratio: 0.2
+        batch_size: 8
+        num_workers: 8
+        pin_memory: true
+model:
+    ref: BEVNet
+    pth_path:
+    kwargs:
+        head_branch_option:
+            ref: IVNet
+            pth_path: null
+            kwargs:
+                encoder_type: vgg16_bn
+                encoder_pretrained: false
+                iv_map: head_map
+                magnitude_scale: 100
+        feet_branch_option:
+            ref: IVNet
+            pth_path: null
+            kwargs:
+                encoder_type: vgg16_bn
+                encoder_pretrained: false
+                iv_map: feet_map
+                magnitude_scale: 100
+        pose_branch_option:
+            ref: PoseNet
+            pth_path: null
+            kwargs:
+                encoder_type: vgg16_bn
+                encoder_pretrained: false
+        bev_decoder_option:
+            magnitude_scale: 100
+            decode_head_branch: true
+            decode_feet_branch: true
+            head_heights: [ 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1 ]
+        share_encoder_option:
+            enable: false
+            encoder_type:
+            branches:
+loss:
+    ref: BEVLoss
+    kwargs:
+        magnitude_scale: 100
+        loss_weights:
+            bev_map: 8.0
+            feet_map: 1.0
+            head_map: 1.0
+            pose-angle: 2.0
+            pose-height: 0.02
+            head_map-cnt-mse: 1e-05
+            feet_map-cnt-mse: 1e-05
+            bev_map-cnt-mse: 1e-05
+optimizer:
+    ref: AdamW
+    kwargs:
+        lr: 0.0008
+        weight_decay: 1e-05
+lr_scheduler:
+    enable: true
+    ref: ExponentialLR
+    kwargs:
+        gamma: 0.98

@@ -1,0 +1,51 @@
+name: PoseNet-base
+ref: PoseNetTask
+datetime: null
+notes: a base configuration for PoseNet
+src_folder: src
+output_path: log
+dataset_path: data/CityUHK-X-BEV
+train_setting:
+    start_epoch: 0
+    epochs: 200
+    valid_on_test: true
+    save_model_freq: 10
+    train_routines:
+        -   epochs: 5
+            init_lr:
+            train_modules: decoder
+            note: pretrain the decoder
+        -   epochs: 200
+            init_lr:
+            train_modules: encoder,decoder
+            note: train the whole network
+dataloader:
+    ref: CityUHKBEVLoaders
+    kwargs:
+        keys: image,camera_angle,camera_height
+        scene_mixed: true
+        use_augment: true
+        valid_ratio: 0.2
+        batch_size: 8
+        num_workers: 8
+        pin_memory: true
+model:
+    ref: PoseNet
+    pth_path:
+    kwargs:
+        encoder_type: resnet101
+        encoder_pretrained: true
+loss:
+    ref: PoseLoss
+    kwargs:
+        height_loss_weight: 0.01
+optimizer:
+    ref: AdamW
+    kwargs:
+        lr: 0.0008
+        weight_decay: 0.00001
+lr_scheduler:
+    enable: true
+    ref: ExponentialLR
+    kwargs:
+        gamma: 0.98
