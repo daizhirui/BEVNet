@@ -1,3 +1,5 @@
+mkdir .\log
+mkdir .\log\test
 
 $models = @( `
     "BEVNet-all\mixed",

@@ -1,0 +1,15 @@
+nvidia-ml-py
+numpy
+matplotlib
+pillow
+opencv-python
+ruamel.yaml
+tqdm
+colorama
+colorlog
+tensorboard
+tensorboardx
+torch_tb_profiler
+snakeviz
+six
+blessed

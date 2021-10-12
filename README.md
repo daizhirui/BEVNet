@@ -13,7 +13,7 @@ geometric reasoning:
 ## Prerequisites
 
 - Windows or Linux
-- NVIDIA GPU + CUDA CuDNN
+- NVIDIA GPU + CUDA cuDNN
 
 ## Create Environment
 
