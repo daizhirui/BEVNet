@@ -1,9 +1,9 @@
 BEV-Net: Assessing Social Distancing Compliance by Joint People Localization and Geometric Reasoning
 ======
 
-PyTorch implementation of ICCV2021 paper, *BEV-Net: Assessing Social 
-Distancing Compliance by Joint People Localization and Geometric Reasoning*, 
-for estimating camera pose and analysing social distancing compliance with 
+PyTorch implementation of ICCV2021 paper, *BEV-Net: Assessing Social
+Distancing Compliance by Joint People Localization and Geometric Reasoning*,
+for estimating camera pose and analysing social distancing compliance with
 geometric reasoning:
 
 ![](assets/teaser.png)
@@ -60,7 +60,7 @@ bash uncompress_checkpoints.bash
 ```
 - Windows: you may need to use tools like `7zip` to uncompress the files.
 
-We also provide the bash script to compress the checkpoints again. So, you 
+We also provide the bash script to compress the checkpoints again. So, you
 can delete `checkpoints_tar_parts` if you like to.
 
 # How to use
@@ -101,4 +101,17 @@ bash test_models.bash
 - Windows
 ```shell
 test_models.ps1
+```
+
+# Citation
+
+```latex
+@misc{dai2021bevnet,
+      title={BEV-Net: Assessing Social Distancing Compliance by Joint People Localization and Geometric Reasoning},
+      author={Zhirui Dai and Yuepeng Jiang and Yi Li and Bo Liu and Antoni B. Chan and Nuno Vasconcelos},
+      year={2021},
+      eprint={2110.04931},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
