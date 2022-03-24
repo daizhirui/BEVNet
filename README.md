@@ -15,17 +15,28 @@ geometric reasoning:
 - Windows or Linux
 - NVIDIA GPU + CUDA cuDNN
 
+### Tested Environments
+
+- Windows
+    - PyTorch 1.8.2
+    - CUDA 11.1
+- Linux
+    - PyTorch 1.8.2
+    - CUDA 11.1
+
 ## Create Environment
 
 ### Linux
 
-```shell
+```bash
+# make sure replace the path with the correct one
+export CUDAHOME="/usr/local/cuda"
 bash create_env.bash
 ```
 
 ### Windows
 
-```shell
+```ps1
 Set-ExecutionPolicy unrestricted
 create_env.ps1
 ```
@@ -65,6 +76,12 @@ can delete `checkpoints_tar_parts` if you like to.
 
 # How to use
 
+Please make sure the environment is activated
+
+```bash
+conda activate bevnet
+```
+
 ## Train Models
 
 ```shell
@@ -73,6 +90,8 @@ python ./src/train.py \
 ```
 
 ## Test Models
+
+- If you want to collect all the test results in a single folder, please make sure `log/test` is created before running any test. Otherwise, test results will be saved along with the checkpoint file.
 
 - Generate model output for the test dataset and calculate losses
 ```shell

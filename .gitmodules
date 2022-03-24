@@ -1,6 +1,8 @@
 [submodule "data"]
 	path = data
 	url = https://github.com/daizhirui/CityUHK-X-BEV.git
+	ignore = dirty
 [submodule "checkpoints_tar_parts"]
 	path = checkpoints_tar_parts
 	url = https://github.com/daizhirui/BEVNet-Checkpoints
+	ignore = dirty
