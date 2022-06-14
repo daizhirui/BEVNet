@@ -7,7 +7,7 @@ if (-not(Get-Command conda)) {
 conda create -y --name bevnet python=3.8 pip
 conda activate bevnet
 conda install -y pywin32
-conda install -y pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
+conda install -y pytorch torchvision cudatoolkit=11.1 -c pytorch -c conda-forge
 conda deactivate
 conda activate bevnet
 pip install 'git+https://github.com/facebookresearch/detectron2.git'
