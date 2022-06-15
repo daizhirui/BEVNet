@@ -2,6 +2,7 @@ import os
 from argparse import ArgumentParser
 from collections import OrderedDict
 from dataclasses import dataclass
+from typing import List
 from typing import Type
 from typing import TypeVar
 from typing import Union
@@ -20,6 +21,7 @@ logger = get_logger(__name__)
 class MainArg:
     task_option_file: str
     test_option_file: str
+    overwrite: List[str]
     use_gpus: list
     wait_gpus: Union[bool, list]
     pth_path: str
@@ -106,6 +108,14 @@ class MainArg:
         group.add_argument(
             '--test-option-file', type=str,
             help='Path to the file of extra options for testing'
+        )
+        group.add_argument(
+            '--overwrite', nargs='+', type=str,
+            help='Overwrite settings in the task option file. e.g. --overwrite '
+                 'dataloader.kwargs.batch_size=16 Note that this option has '
+                 'the highest priority that it will overwrite settings from '
+                 '--dataset-path and --output-path if you post different '
+                 'settings here.'
         )
 
         group = parser.add_argument_group(

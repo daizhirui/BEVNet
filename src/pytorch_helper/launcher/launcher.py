@@ -1,5 +1,6 @@
 import os
 from collections import OrderedDict
+from tkinter.messagebox import NO
 from typing import Callable
 from typing import List
 from typing import Type
@@ -160,6 +161,16 @@ class Launcher:
         task_dict['profiling'] = self.args.profiling
         task_dict['profile_tool'] = self.args.profile_tool
         task_dict['profile_memory'] = self.args.profile_memory
+
+        if self.args.overwrite is not None:
+            for expr in self.args.overwrite:
+                expr: str
+                key, value = expr.split('=')
+                subkeys = key.split('.')
+                option: dict = task_dict
+                for subkey in subkeys[:-1]:
+                    option: dict = option[subkey]
+                option[subkeys[-1]] = type(option[subkeys[-1]])(value)
 
         return task_dict
 
