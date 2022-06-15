@@ -10,7 +10,7 @@ conda install -y pywin32
 conda install -y pytorch torchvision cudatoolkit=11.1 -c pytorch -c conda-forge
 conda deactivate
 conda activate bevnet
-pip install 'git+https://github.com/facebookresearch/detectron2.git'
+python -m pip install detectron2==0.6 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.8/index.html
 Set-Location src\models\cspnet\lib_win32
 pip install Cython
 Makefile.ps1

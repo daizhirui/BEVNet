@@ -13,7 +13,7 @@ conda activate bevnet
 conda install -y pytorch torchvision cudatoolkit=11.1 numpy=1.20.3 -c pytorch-lts -c nvidia
 conda deactivate
 conda activate bevnet
-pip install 'git+https://github.com/facebookresearch/detectron2.git'
+python -m pip install detectron2==0.6 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.8/index.html
 cd src/models/cspnet/lib || return
 pip install Cython
 make clean
